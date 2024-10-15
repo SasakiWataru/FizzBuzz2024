@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ビンゴシステム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .current-number {
+            font-size: 48px;
+            margin: 20px;
+        }
+        .history {
+            font-size: 18px;
+            margin: 20px;
+        }
+        button {
+            font-size: 24px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ビンゴシステム</h1>
+    <div class="current-number" id="currentNumber">ボタンを押して番号を引いてください！</div>
+    <button onclick="drawNumber()">番号を引く</button>
+    <div class="history" id="history">履歴: </div>
+
+    <script>
+        const numbers = Array.from({length: 75}, (_, i) => i + 1); 
+        let drawnNumbers = []; 
+
+        function drawNumber() {
+            if (numbers.length === 0) {
+                document.getElementById("currentNumber").innerText = "すべての番号が引かれました！";
+                return;
+            }
+
+
+            const randomIndex = Math.floor(Math.random() * numbers.length);
+            const number = numbers.splice(randomIndex, 1)[0];
+
+            drawnNumbers.push(number);
+
+            document.getElementById("currentNumber").innerText = "現在の番号: " + number;
+
+            document.getElementById("history").innerText = "履歴: " + drawnNumbers.join(", ");
+        }
+    </script>
+
+</body>
+</html>
